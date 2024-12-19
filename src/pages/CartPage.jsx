@@ -164,7 +164,7 @@ const CartPage = () => {
                   onChange={handleSelectAll}
                   disabled={cartItems.length === 0}
                 />
-                <span className="text-gray-600">Select All (0)</span>
+                <span className="text-gray-600 ml-2">Select All (0)</span>
               </div>
               <div className="flex justify-center items-center flex-col">
                 <h2 className="text-lg font-semibold text-gray-600 mb-2">Wow, your shopping cart is empty</h2>
