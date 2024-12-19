@@ -60,31 +60,26 @@ const ProductDetailPage = () => {
       toast.error("Please log in to add products to cart.");
       return;
     }
-  
-    // Ambil keranjang dari localStorage
+
     const savedCart = JSON.parse(localStorage.getItem(`cart_${token}`)) || [];
     console.log("Current cart:", savedCart);
-  
-    // Cari produk dalam keranjang
+
     const existingItemIndex = savedCart.findIndex((item) => item.id === product.id);
     console.log("Existing item index in cart:", existingItemIndex);
   
     let currentCartQuantity = 0;
-  
-    // Hitung jumlah produk saat ini di keranjang
+
     if (existingItemIndex >= 0) {
       currentCartQuantity = savedCart[existingItemIndex].quantity;
       console.log(
         `Current quantity of product (ID: ${product.id}) in cart: ${currentCartQuantity}`
       );
     }
-  
-    // Total kuantitas yang akan ditambahkan
+
     const newQuantity = currentCartQuantity + quantity;
     console.log("Requested quantity to add:", quantity);
     console.log("New total quantity:", newQuantity);
-  
-    // Periksa apakah kuantitas baru melebihi stok
+
     if (newQuantity > product.quantity) {
       console.log(
         `Cannot add product. Requested quantity (${newQuantity}) exceeds stock (${product.quantity}).`
@@ -92,8 +87,7 @@ const ProductDetailPage = () => {
       toast.error("The quantity to be added exceeds the available stock!");
       return;
     }
-  
-    // Tambahkan produk ke keranjang atau perbarui kuantitas
+
     if (existingItemIndex >= 0) {
       savedCart[existingItemIndex].quantity = newQuantity;
       console.log(
@@ -112,12 +106,10 @@ const ProductDetailPage = () => {
         { id: product.id, title: product.title, quantity: quantity }
       );
     }
-  
-    // Simpan keranjang yang diperbarui ke localStorage
+
     localStorage.setItem(`cart_${token}`, JSON.stringify(savedCart));
     console.log("Updated cart saved to localStorage:", savedCart);
-  
-    // Perbarui Redux store
+    
     dispatch(
       addToCart({
         id: product.id,

@@ -12,9 +12,9 @@ const HomePage = ({ selectedCategory, searchQuery }) => {
     if (status === "idle") {
       const savedProducts = JSON.parse(localStorage.getItem("products"));
       if (savedProducts && savedProducts.length > 0) {
-        dispatch(fetchProducts(savedProducts));  // Dispatch dengan produk yang ada di localStorage
+        dispatch(fetchProducts(savedProducts));
       } else {
-        dispatch(fetchProducts());  // Jika tidak ada, ambil dari API
+        dispatch(fetchProducts());
       }
     }
   }, [status, dispatch]);

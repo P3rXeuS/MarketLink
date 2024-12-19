@@ -27,16 +27,16 @@ const LoginPage = () => {
     );
 
     if (user) {
-      toast.info("Logging in...", { autoClose: 1500 }); // Loading toast
+      toast.info("Logging in...", { autoClose: 1500 });
       setTimeout(() => {
         localStorage.setItem("token", user.id);
         localStorage.setItem("userEmail", email);
-        toast.success("Login successful!", { autoClose: 2000 }); // Success toast
+        toast.success("Login successful!", { autoClose: 2000 });
         navigate("/");
-      }, 1500); // Simulate loading delay
+      }, 1500);
     } else {
       setError("Invalid email or password. Please try again.");
-      toast.error("Invalid credentials!"); // Error toast
+      toast.error("Invalid credentials!");
     }
   };
 

@@ -103,20 +103,18 @@ const CartPage = () => {
       toast.error("No items selected!", { toastId: "error_no_items" });
       return;
     }
-  
-    // Pastikan logika tetap berjalan meskipun cartItems menjadi kosong
+    
     let purchaseSuccess = false;
   
     const updatedProducts = products.map((prod) => {
       const cartItem = cartItems.find((item) => item.id === prod.id);
       if (cartItem && selectedItems.has(prod.id)) {
-        // Cek apakah stok cukup
+
         if (prod.quantity < cartItem.quantity) {
           toast.error(`Insufficient stock for: ${cartItem.title}`, { toastId: prod.id });
-          return prod; // Tidak ubah stok jika stok tidak cukup
+          return prod;
         }
-  
-        // Kurangi stok produk
+
         const newStock = prod.quantity - cartItem.quantity;
         localStorage.setItem(`product_${prod.id}`, JSON.stringify({ ...prod, quantity: newStock }));
         dispatch(reduceStock({ id: prod.id, quantity: cartItem.quantity }));
@@ -127,14 +125,12 @@ const CartPage = () => {
       return prod;
     });
   
-    // Perbarui cartItems untuk menyisakan produk yang tidak dibeli
     const remainingCartItems = cartItems.filter((item) => !selectedItems.has(item.id));
     setCartItems([...remainingCartItems]); // Buat array baru
     localStorage.setItem(`cart_${token}`, JSON.stringify(remainingCartItems));
     setSelectedItems(new Set());
     setSelectAll(false);
-  
-    // Pastikan toast tetap muncul meskipun cartItems menjadi kosong
+
     if (purchaseSuccess) {
       toast.success("Purchase successful!", { toastId: null });
     }
