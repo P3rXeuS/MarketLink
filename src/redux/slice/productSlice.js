@@ -10,7 +10,6 @@ const generateSlug = (text) => {
 
 const loadInitialState = () => {
   try {
-    // Coba load data dari localStorage
     const savedProducts = localStorage.getItem("products");
     if (savedProducts) {
       return JSON.parse(savedProducts);
@@ -26,23 +25,19 @@ export const fetchProducts = createAsyncThunk(
   async (_, { getState }) => {
     const currentState = getState().products;
     
-    // Jika sudah ada products di state, gunakan itu
     if (currentState.items.length > 0) {
       return currentState.items;
     }
 
-    // Jika tidak, coba load dari localStorage
     const savedProducts = loadInitialState();
     if (savedProducts.length > 0) {
       return savedProducts;
     }
 
-    // Jika tidak ada di localStorage, fetch dari API
     const response = await fetch(`${import.meta.env.VITE_API}/products`);
     const data = await response.json();
 
     const products = data.map((product) => {
-      // Cek jika ada data quantity tersimpan untuk produk ini
       const savedProduct = localStorage.getItem(`product_${product.id}`);
       if (savedProduct) {
         const parsedProduct = JSON.parse(savedProduct);
@@ -54,7 +49,6 @@ export const fetchProducts = createAsyncThunk(
         };
       }
       
-      // Jika tidak ada data tersimpan, gunakan nilai default
       return {
         ...product,
         quantity: 20,
@@ -63,7 +57,6 @@ export const fetchProducts = createAsyncThunk(
       };
     });
 
-    // Simpan ke localStorage
     localStorage.setItem("products", JSON.stringify(products));
     
     return products;
