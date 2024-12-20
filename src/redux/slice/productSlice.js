@@ -93,7 +93,6 @@ const productSlice = createSlice({
         product.quantity = Math.max(0, product.quantity - quantity);
         product.outOfStock = product.quantity === 0;
 
-        // Update both localStorage entries
         localStorage.setItem(`product_${product.id}`, JSON.stringify(product));
         localStorage.setItem("products", JSON.stringify(state.items));
       }
@@ -105,7 +104,6 @@ const productSlice = createSlice({
         product.quantity += quantity;
         product.outOfStock = false;
         
-        // Update both localStorage entries
         localStorage.setItem(`product_${product.id}`, JSON.stringify(product));
         localStorage.setItem("products", JSON.stringify(state.items));
       }
@@ -117,7 +115,6 @@ const productSlice = createSlice({
         product.outOfStock = true;
         product.quantity = 0;
         
-        // Update both localStorage entries
         localStorage.setItem(`product_${product.id}`, JSON.stringify(product));
         localStorage.setItem("products", JSON.stringify(state.items));
       }

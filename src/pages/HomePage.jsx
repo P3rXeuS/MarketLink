@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/slice/productSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const HomePage = ({ selectedCategory, searchQuery }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { items, status, error } = useSelector((state) => state.products);
 
   useEffect(() => {
@@ -28,7 +27,9 @@ const HomePage = ({ selectedCategory, searchQuery }) => {
       .includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
-  
+
+  // console.log("Filtered products:", filteredProducts);
+
   if (status === "loading") return <p>Loading products...</p>;
   if (status === "failed") return <p>Error: {error}</p>;
 

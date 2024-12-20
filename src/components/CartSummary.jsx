@@ -1,6 +1,9 @@
 import React from "react";
 
 const CartSummary = ({ total, handleBuy, selectedItems }) => {
+  // console.log("Total:", total);
+  // console.log("Selected Items:", selectedItems);
+
   return (
     <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow h-[250px]">
       <h2 className="text-lg font-bold mb-4">Summary</h2>

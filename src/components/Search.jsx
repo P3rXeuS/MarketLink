@@ -6,11 +6,15 @@ const Search = ({ onSearch }) => {
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
-    onSearch(event.target.value);
+    const searchValue = event.target.value;
+    // console.log("Input changed:", searchValue);
+    onSearch(searchValue);
   };
 
   const handleKeyPress = (event) => {
+    // console.log("Key pressed:", event.key);
     if (event.key === "Enter") {
+      // console.log("Navigating to home");
       navigate("/");
     }
   };
@@ -23,7 +27,7 @@ const Search = ({ onSearch }) => {
         placeholder="Search for products..."
         className="pl-10 px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         onChange={handleInputChange}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
       />
     </div>
   );

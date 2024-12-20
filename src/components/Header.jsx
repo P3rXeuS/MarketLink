@@ -13,12 +13,14 @@ const Header = ({ onSelectCategory, onSearch }) => {
     const fetchCategories = async () => {
       const response = await fetch(`${import.meta.env.VITE_API}/products/categories`);
       const data = await response.json();
+      // console.log("Fetched categories:", data);
       setCategories(data);
     };
     fetchCategories();
   }, []);
 
   const handleLogoClick = () => {
+    // console.log("Logo clicked");
     onSelectCategory("");
     onSearch("");
     navigate("/");

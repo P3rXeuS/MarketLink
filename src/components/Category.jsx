@@ -6,6 +6,7 @@ const Category = ({ categories, selectedCategory, onSelectCategory }) => {
   const navigate = useNavigate();
 
   const handleSelectCategory = (category) => {
+    // console.log("Selected category:", category);
     onSelectCategory(category);
     navigate(`/?category=${category}`);
   };

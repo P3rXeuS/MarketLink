@@ -62,37 +62,37 @@ const ProductDetailPage = () => {
     }
 
     const savedCart = JSON.parse(localStorage.getItem(`cart_${token}`)) || [];
-    console.log("Current cart:", savedCart);
+    // console.log("Current cart:", savedCart);
 
     const existingItemIndex = savedCart.findIndex((item) => item.id === product.id);
-    console.log("Existing item index in cart:", existingItemIndex);
+    // console.log("Existing item index in cart:", existingItemIndex);
   
     let currentCartQuantity = 0;
 
     if (existingItemIndex >= 0) {
       currentCartQuantity = savedCart[existingItemIndex].quantity;
-      console.log(
-        `Current quantity of product (ID: ${product.id}) in cart: ${currentCartQuantity}`
-      );
+      // console.log(
+      //   `Current quantity of product (ID: ${product.id}) in cart: ${currentCartQuantity}`
+      // );
     }
 
     const newQuantity = currentCartQuantity + quantity;
-    console.log("Requested quantity to add:", quantity);
-    console.log("New total quantity:", newQuantity);
+    // console.log("Requested quantity to add:", quantity);
+    // console.log("New total quantity:", newQuantity);
 
     if (newQuantity > product.quantity) {
-      console.log(
-        `Cannot add product. Requested quantity (${newQuantity}) exceeds stock (${product.quantity}).`
-      );
+      // console.log(
+      //   `Cannot add product. Requested quantity (${newQuantity}) exceeds stock (${product.quantity}).`
+      // );
       toast.error("The quantity to be added exceeds the available stock!");
       return;
     }
 
     if (existingItemIndex >= 0) {
       savedCart[existingItemIndex].quantity = newQuantity;
-      console.log(
-        `Updated product (ID: ${product.id}) in cart. New quantity: ${newQuantity}`
-      );
+      // console.log(
+      //   `Updated product (ID: ${product.id}) in cart. New quantity: ${newQuantity}`
+      // );
     } else {
       savedCart.push({
         id: product.id,
@@ -101,14 +101,14 @@ const ProductDetailPage = () => {
         price: product.price,
         image: product.image,
       });
-      console.log(
-        `Added new product to cart:`,
-        { id: product.id, title: product.title, quantity: quantity }
-      );
+      // console.log(
+      //   `Added new product to cart:`,
+      //   { id: product.id, title: product.title, quantity: quantity }
+      // );
     }
 
     localStorage.setItem(`cart_${token}`, JSON.stringify(savedCart));
-    console.log("Updated cart saved to localStorage:", savedCart);
+    // console.log("Updated cart saved to localStorage:", savedCart);
     
     dispatch(
       addToCart({
